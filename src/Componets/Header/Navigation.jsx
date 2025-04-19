@@ -12,11 +12,11 @@ export default function Navigation() {
    <div className="m-1">
         <button
           onClick={() => setOpen(true)}
-          className="btn btn-outline flex text-xl gap-3 items-center"
+          className="btn btn-outline flex text-xl  gap-3 items-center"
         >
           <HiOutlineMenuAlt1 />
-          <p>Short by Category</p>
-          <FaAngleDown />
+          <p>Category</p>
+          <FaAngleDown className='hidden md:block lg:block' />
         </button>
       </div>
 
@@ -67,7 +67,7 @@ export default function Navigation() {
         </div>
       </div>
     
-    <div className='flex gap-12 '>
+    <div className='lg:flex  hidden   gap-12 '>
     <div className="dropdown">
   <div tabIndex={0} role="button" className=" m-1"> <NavLink className='hover:text-red-600 hover:bg-gray-200'>Home</NavLink></div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
@@ -114,6 +114,18 @@ export default function Navigation() {
 </div>
        
     <div className="dropdown">
+  <div tabIndex={0} role="button" className=" m-1">  <NavLink>Blog</NavLink></div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+  </ul>
+</div>
+       
+    <div className="dropdown">
   <div tabIndex={0} role="button" className=" m-1">  <NavLink>More</NavLink></div>
   <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
     <li><a>Item 1</a></li>
@@ -129,7 +141,7 @@ export default function Navigation() {
        
         
     </div>
-    <div>
+    <div className='hidden md:block lg:block'>
         Free Internation Delivery
     </div>
    </div>
