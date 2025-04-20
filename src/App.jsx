@@ -1,5 +1,6 @@
 
 import './App.css'
+import Shipping from './Componets/Body/Shipping'
 import Header from './Componets/Header/Header'
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
     <>
      
      <Header></Header>
+     <Shipping></Shipping>
       
     </>
   )

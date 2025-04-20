@@ -32,7 +32,7 @@ export default function BannerCategory() {
       <Swiper
         modules={[Navigation]}
         navigation
-        spaceBetween={15}
+        spaceBetween={60}
         breakpoints={{
           320: { slidesPerView: 2 },
           480: { slidesPerView: 3 },
