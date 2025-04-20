@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 export default function CategoryTab() {
   const [category, setCategory] = useState("Fashion");
+  const sliderRef = useRef(null);
 
   const allProducts = {
     Fashion: new Array(15).fill().map((_, i) => ({
@@ -28,13 +29,10 @@ export default function CategoryTab() {
   const products = allProducts[category];
 
   const scroll = (dir) => {
-    const slider = document.getElementById("slider");
+    const slider = sliderRef.current;
     if (slider) {
       const scrollAmount = window.innerWidth < 768 ? 240 : 300;
-      slider.scrollBy({
-        left: dir === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
+      slider.scrollLeft += dir === "left" ? -scrollAmount : scrollAmount;
     }
   };
 
@@ -57,40 +55,40 @@ export default function CategoryTab() {
         ))}
       </div>
 
-      {/* Arrows + Carousel */}
+      {/* Carousel Wrapper */}
       <div className="relative">
         {/* Left Arrow */}
         <button
           onClick={() => scroll("left")}
-          className="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 md:p-3 rounded-full hover:bg-gray-200"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 md:p-3 rounded-full hover:bg-gray-200"
         >
-          <FaArrowLeft size={window.innerWidth < 768 ? 14 : 18} />
+          <FaArrowLeft />
         </button>
 
         {/* Right Arrow */}
         <button
           onClick={() => scroll("right")}
-          className="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 md:p-3 rounded-full hover:bg-gray-200"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow-md p-2 md:p-3 rounded-full hover:bg-gray-200"
         >
-          <FaArrowRight size={window.innerWidth < 768 ? 14 : 18} />
+          <FaArrowRight />
         </button>
 
-        {/* Carousel */}
+        {/* Product List */}
         <div
-          id="slider"
-          className="flex space-x-4 overflow-x-auto scrollbar-hide px-6 snap-x scroll-smooth"
+          ref={sliderRef}
+          className="flex overflow-x-auto space-x-4 px-6 scroll-smooth no-scrollbar"
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="snap-start flex-shrink-0 w-52 sm:w-56 md:w-60 lg:w-64"
+              className="flex-shrink-0 w-48 sm:w-56 md:w-60 lg:w-64 snap-start"
             >
-              <div className="card bg-base-200 shadow-md">
-                <figure className="bg-white h-28 flex items-center justify-center">
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="bg-gray-100 h-28 flex items-center justify-center">
                   <span className="text-gray-400 text-sm">Image</span>
-                </figure>
-                <div className="card-body p-4">
-                  <h2 className="card-title text-base">{product.name}</h2>
+                </div>
+                <div className="p-4 space-y-1">
+                  <h2 className="text-base font-semibold">{product.name}</h2>
                   <p className="text-sm text-gray-500">{product.brand}</p>
                   <p className="text-yellow-500 text-sm">★★★★☆</p>
                   <p className="text-green-600 font-bold">${product.price}</p>

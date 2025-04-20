@@ -1,15 +1,10 @@
-.swiper-button-next,
-.swiper-button-prev {
-  width: 25px !important;   /* Smaller width */
-  height: 25px !important;  /* Smaller height */
-  background-color: white;
-  border-radius: 9999px;    /* Fully rounded */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  color: black;
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: #f3f4f6; /* light gray */
+  transform: scale(1.05);
+  transition: 0.2s;
 }
-
 .swiper-button-next::after,
 .swiper-button-prev::after {
-  font-size: 14px !important; /* Smaller arrow icon */
-  font-weight: bold;
+  color: inherit; /* or white if needed */
 }

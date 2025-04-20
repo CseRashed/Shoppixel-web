@@ -2,7 +2,7 @@ import React from 'react'
 import offerBanner from './../../assets/offer-banner.jpg'
 export default function OfferBanner() {
   return (
-    <div className="relative container mx-auto w-full my-10">
+    <div className="relative container mx-auto w-full ">
   {/* Full-width Image */}
   <img
     src={offerBanner}
