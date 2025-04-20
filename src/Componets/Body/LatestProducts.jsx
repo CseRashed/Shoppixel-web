@@ -38,7 +38,7 @@ export default function LatestProducts() {
   };
 
   return (
-    <div className='container mx-auto my-16'>
+    <div className='container mx-auto mt-7 lg:mt-16 md:mt-10'>
         <h3 className='text-2xl font-medium'>Latest Products</h3>
     <div>
  <div className="relative">
