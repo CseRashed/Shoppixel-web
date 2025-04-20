@@ -2,6 +2,7 @@
 import './App.css'
 import CategoryTab from './Componets/Body/CategoryTab'
 import Discount from './Componets/Body/Discount'
+import FeaturedProducts from './Componets/Body/FeaturedProducts'
 import LatestProducts from './Componets/Body/LatestProducts'
 import OfferBanner from './Componets/Body/OfferBanner'
 import Shipping from './Componets/Body/Shipping'
@@ -18,6 +19,7 @@ function App() {
      <OfferBanner></OfferBanner>
      <LatestProducts></LatestProducts>
      <Discount></Discount>
+     <FeaturedProducts></FeaturedProducts>
       
     </>
   )
