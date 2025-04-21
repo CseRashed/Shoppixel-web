@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Navigation from './Navigation'
-import Banner from './Banner'
 
 export default function Header() {
   return (
@@ -14,7 +13,7 @@ export default function Header() {
  <Navigation></Navigation>
  </div>
  <div>
-  <Banner></Banner>
+ 
  </div>
    </>
   )

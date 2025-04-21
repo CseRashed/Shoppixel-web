@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-export default function FeaturedProducts() {
+export default function LatestProducts() {
   const [category, setCategory] = useState("Fashion");
 
   const allProducts = {
@@ -40,7 +40,7 @@ export default function FeaturedProducts() {
 
   return (
     <div className='container mx-auto mt-7 lg:mt-16 md:mt-10'>
-      <h3 className='text-2xl font-medium mb-4'>Featured Products</h3>
+      <h3 className='text-2xl font-medium mb-4'>Latest Products</h3>
 
       <div className="relative">
         {/* Left Arrow */}

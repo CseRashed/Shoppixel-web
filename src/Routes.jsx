@@ -1,5 +1,6 @@
 import { createHashRouter } from "react-router-dom";
 import App from "./App";
+import Home from "./Pages/Home/Home";
 
 
 const router =createHashRouter([
@@ -8,7 +9,8 @@ const router =createHashRouter([
         element:<App></App>,
         children:[
             {
-               
+               path:'/',
+               element:<Home></Home>
             }
         ]
     }

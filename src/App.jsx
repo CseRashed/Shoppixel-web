@@ -1,11 +1,8 @@
 
+import { Outlet } from 'react-router-dom'
 import './App.css'
-import CategoryTab from './Componets/Body/CategoryTab'
-import Discount from './Componets/Body/Discount'
-import FeaturedProducts from './Componets/Body/FeaturedProducts'
-import LatestProducts from './Componets/Body/LatestProducts'
-import OfferBanner from './Componets/Body/OfferBanner'
-import Shipping from './Componets/Body/Shipping'
+
+import Footer from './Componets/Footer/Footer'
 import Header from './Componets/Header/Header'
 
 function App() {
@@ -14,13 +11,8 @@ function App() {
     <>
      
      <Header></Header>
-     <Shipping></Shipping>
-     <CategoryTab></CategoryTab>
-     <OfferBanner></OfferBanner>
-     <LatestProducts></LatestProducts>
-     <Discount></Discount>
-     <FeaturedProducts></FeaturedProducts>
-      
+    <Outlet></Outlet>
+      <Footer></Footer>
     </>
   )
 }
