@@ -1,33 +1,31 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import useAxios from "../../Hooks/useAxios";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryTab() {
-  const [category, setCategory] = useState("Fashion");
+  const [category, setCategory] = useState("Mobile");
+  const [allProduct, setAllProduct] = useState([]);
   const sliderRef = useRef(null);
+  const axiosSecure = useAxios();
 
-  const allProducts = {
-    Fashion: new Array(15).fill().map((_, i) => ({
-      id: i,
-      name: "T-Shirt",
-      brand: "Zara",
-      price: 19.99,
-    })),
-    Electronics: new Array(15).fill().map((_, i) => ({
-      id: i + 100,
-      name: "Headphones",
-      brand: "Sony",
-      price: 79.99,
-    })),
-    Furniture: new Array(15).fill().map((_, i) => ({
-      id: i + 200,
-      name: "Chair",
-      brand: "Ikea",
-      price: 39.99,
-    })),
-  };
+  // Fetch products
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axiosSecure.get("/products");
+        setAllProduct(res.data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const products = allProducts[category];
+  // Filter products by selected category
+  const products = allProduct.filter((p) => p.category === category);
 
+  // Scroll functionality
   const scroll = (dir) => {
     const slider = sliderRef.current;
     if (slider) {
@@ -35,12 +33,19 @@ export default function CategoryTab() {
       slider.scrollLeft += dir === "left" ? -scrollAmount : scrollAmount;
     }
   };
+  const navigate =useNavigate()
+  const handleProduct=(id)=>{
+    navigate(`products/${id}`)
+   
 
+  }
   return (
+    <>
     <div className="px-4 py-10 container mx-auto overflow-hidden">
+    <h1 className="text-2xl font-medium mb-5">Popular Products</h1>
       {/* Tabs */}
       <div className="flex flex-wrap justify-center md:justify-start gap-4 mb-6">
-        {["Fashion", "Electronics", "Furniture"].map((tab) => (
+        {["Mobile", "Electronic", "Furniture"].map((tab) => (
           <button
             key={tab}
             className={`text-lg font-semibold transition ${
@@ -78,26 +83,31 @@ export default function CategoryTab() {
           ref={sliderRef}
           className="flex overflow-x-auto space-x-4 px-6 scroll-smooth no-scrollbar"
         >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="flex-shrink-0 w-48 sm:w-56 md:w-60 lg:w-64 snap-start"
-            >
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="bg-gray-100 h-28 flex items-center justify-center">
-                  <span className="text-gray-400 text-sm">Image</span>
-                </div>
-                <div className="p-4 space-y-1">
-                  <h2 className="text-base font-semibold">{product.name}</h2>
-                  <p className="text-sm text-gray-500">{product.brand}</p>
-                  <p className="text-yellow-500 text-sm">★★★★☆</p>
-                  <p className="text-green-600 font-bold">${product.price}</p>
+          {products.length === 0 ? (
+            <p className="text-gray-400 text-sm">No products found.</p>
+          ) : (
+            products.map((product) => (
+              <div
+                key={product._id || product.id}
+                className="flex-shrink-0 w-48 sm:w-56 md:w-60 lg:w-64 snap-start"
+              >
+                <div onClick={()=>handleProduct(product._id)} className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <div className="bg-gray-100 h-28 flex items-center justify-center">
+                    <img className="w-[100px]" src={product.photo} alt={`${product.name} image`} />
+                  </div>
+                  <div className="p-4 space-y-1">
+                    <h2 className="text-base font-semibold">{product.name}</h2>
+                    <p className="text-sm text-gray-500">{product.brand}</p>
+                    <p className="text-yellow-500 text-sm">★★★★☆</p>
+                    <p className="text-green-600 font-bold">${product.price}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </div>
+    </>
   );
 }

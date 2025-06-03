@@ -1,143 +1,116 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaAngleDown } from "react-icons/fa6";
 import { Link, NavLink } from 'react-router-dom';
+
 export default function Navigation() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+
   return (
-   <>
-   <div className='mt-5 flex justify-between items-center '>
-    
-    
-   <div className="m-1">
-        <button
-          onClick={() => setOpen(true)}
-          className="btn btn-outline flex text-xl  gap-3 items-center"
-        >
-          <HiOutlineMenuAlt1 />
-          <p>Category</p>
-          <FaAngleDown className='hidden md:block lg:block' />
-        </button>
+    <>
+      <div className='w-full px-4 py-3 bg-gradient-to-r from-white to-blue-50 shadow-md flex justify-between items-center flex-wrap gap-4 sticky top-0 z-50'>
+
+        {/* Left: Category Button */}
+        <div>
+          <button
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-2 px-4 py-2 border border-blue-500 rounded-md text-blue-600 font-medium hover:bg-blue-100 transition-all"
+          >
+            <HiOutlineMenuAlt1 className="text-xl" />
+            <span>Category</span>
+            <FaAngleDown className="hidden md:inline-block" />
+          </button>
+        </div>
+
+        {/* Middle: Nav Items (Hidden on small) */}
+        <div className='hidden lg:flex items-center gap-6 text-gray-700 font-medium'>
+          <NavLink to="/" className="hover:text-blue-600 transition">Home</NavLink>
+
+          <div className="relative group">
+            <span className="cursor-pointer hover:text-blue-600 transition">Fashion</span>
+            <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Watch</li>
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Cosmetics</li>
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Sunglass</li>
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Neckless</li>
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Purse</li>
+              <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Money Bag</li>
+            </ul>
+          </div>
+
+          <div className="relative group">
+            <span className="cursor-pointer hover:text-blue-600 transition">New Arrivals</span>
+            <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Item {i}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative group">
+            <span className="cursor-pointer hover:text-blue-600 transition">All Brands</span>
+            <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Brand {i}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative group">
+            <span className="cursor-pointer hover:text-blue-600 transition">Blog</span>
+            <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Blog {i}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="relative group">
+            <span className="cursor-pointer hover:text-blue-600 transition">More</span>
+            <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
+              {[1, 2, 3, 4, 5, 6].map(i => (
+                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">More {i}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Right Text */}
+        <div className='text-sm text-gray-600 hidden md:block'>Free International Delivery</div>
       </div>
 
       {/* Overlay */}
       {open && (
         <div
-          className="fixed inset-0  bg-opacity-40 z-40"
+          className="fixed inset-0 bg-black bg-opacity-40 z-40"
           onClick={() => setOpen(false)}
         ></div>
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-4 z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-5 z-50 transform transition-transform duration-300 ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <h1 className="text-xl font-semibold mb-4">Shop By Category</h1>
-        <div className="space-y-3">
-          <div>          <Link to="#">Fashion</Link>
-          </div>
-          <Link to="#">Jewellery</Link>
-          <div>          <Link to="#">Watches</Link>
-          </div>
-          <div>          <Link to="#">OutWear</Link>
-</div>
-          <div>          <Link to="#">Cosmetics</Link>
-          </div>
-          <div>          <Link to="#">Accessories</Link>
-          </div>
-          <div>          <Link to="#">Electronics</Link>
-          </div>
-          <div>          <Link to="#">Furniture</Link>
-          </div>
-          <div>          <Link to="#">Sunglasses</Link>
-          </div>
-          <div>          <Link to="#">Rolling Diamond</Link>
-          </div>
-          <div>          <Link to="#">Xbox Controller</Link>
-          </div>
-          <div>          <Link to="#">Leather Watch</Link>
-          </div>
-          <div>          <Link to="#">Smart Tablet</Link>
-          </div>
-          <div>          <Link to="#">Purse</Link>
-          </div>
-         
-        </div>
+        <h2 className="text-xl font-semibold text-blue-600 mb-4 border-b pb-2">Shop by Category</h2>
+        <nav className="flex flex-col space-y-3 text-gray-700">
+          <Link to="#" className="hover:text-blue-500">Fashion</Link>
+          <Link to="#" className="hover:text-blue-500">Jewellery</Link>
+          <Link to="#" className="hover:text-blue-500">Watches</Link>
+          <Link to="#" className="hover:text-blue-500">OutWear</Link>
+          <Link to="#" className="hover:text-blue-500">Cosmetics</Link>
+          <Link to="#" className="hover:text-blue-500">Accessories</Link>
+          <Link to="#" className="hover:text-blue-500">Electronics</Link>
+          <Link to="#" className="hover:text-blue-500">Furniture</Link>
+          <Link to="#" className="hover:text-blue-500">Sunglasses</Link>
+          <Link to="#" className="hover:text-blue-500">Rolling Diamond</Link>
+          <Link to="#" className="hover:text-blue-500">Xbox Controller</Link>
+          <Link to="#" className="hover:text-blue-500">Leather Watch</Link>
+          <Link to="#" className="hover:text-blue-500">Smart Tablet</Link>
+          <Link to="#" className="hover:text-blue-500">Purse</Link>
+        </nav>
       </div>
-    
-    <div className='lg:flex  hidden   gap-12 '>
-    <div>
-  <div tabIndex={0} role="button" className=" m-1"> <NavLink to={'/'} className='hover:text-red-600 hover:bg-gray-200'>Home</NavLink></div>
-
-</div>
-    <div className="dropdown">
-  <div tabIndex={0} role="button" className=" m-1">  <NavLink>Fashion</NavLink></div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-    <div className="dropdown">
-  <div tabIndex={0} role="button" className=" m-1">   <NavLink>New Arrivals</NavLink></div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-    <div className="dropdown">
-  <div tabIndex={0} role="button" className=" m-1">  <NavLink>All Brands</NavLink></div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-       
-    <div className="dropdown">
-  <div tabIndex={0} role="button" className=" m-1">  <NavLink>Blog</NavLink></div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-       
-    <div className="dropdown">
-  <div tabIndex={0} role="button" className=" m-1">  <NavLink>More</NavLink></div>
-  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-    <li><a>Item 1</a></li>
-    <li><a>Item 2</a></li>
-  </ul>
-</div>
-       
-      
-       
-        
-    </div>
-    <div className='hidden md:block lg:block'>
-        Free Internation Delivery
-    </div>
-   </div>
-   </>
-  )
+    </>
+  );
 }

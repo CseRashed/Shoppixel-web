@@ -1,125 +1,117 @@
-import React, { useState } from 'react'
-import { FaRegHeart } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from 'react';
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { LuMessageSquareMore } from "react-icons/lu";
+import { IoMdMenu } from "react-icons/io";
 import { Link } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
-import { IoMdMenu } from "react-icons/io";
-import { FaRegUser } from "react-icons/fa";
-export default function Navbar() {
-          const [open, setOpen] = useState(false)
-        
-  return (
-    <>
-      <div className='w-full px-4 py-3'>
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useAxios from '../../Hooks/useAxios';
 
-        {/* ✅ Top Bar: Shoppixel + Icons => Always same row */}
-        <div className='flex justify-between items-center w-full'>
-          {/* Logo */}
-          <div className='text-3xl flex gap-1 items-center font-bold'>
-                <p><IoMdMenu  onClick={() => setOpen(true)}  className=' lg:hidden sm:block md:block' /></p>
-            
-                <p >Shoppixel</p>
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const {user, logOut} =useContext(AuthContext)
+  const [cart, setCart]= useState([])
+  const email= user?.email;
+  const axiosSecure =useAxios()
+  useEffect(()=>{
+ axiosSecure.get(`/carts/${email}`)
+ .then((res)=>{
+  console.log(res.data)
+  setCart(res.data)
+ })
+  },[user])
+  return (
+    <div className="w-full px-4 py-3 bg-gradient-to-r from-white to-blue-50 shadow-md sticky top-0 z-50">
+      {/* ✅ Top Row: Logo + Icons */}
+      <div className="flex justify-between items-center">
+        {/* Logo & Sidebar */}
+        <div className="flex items-center gap-3 text-2xl font-extrabold text-[#e99157]">
+          <IoMdMenu
+            onClick={() => setOpen(true)}
+            className="cursor-pointer block lg:hidden"
+          />
+          <Link to="/">Shoppixel</Link>
+        </div>
+
+        {/* Icons + User */}
+        <div className="flex items-center gap-5">
+          {/* Message */}
+       <Link to={'/message'}>
+       <div className="relative">
+            <Tooltip title="Messages" placement="top">
+              <LuMessageSquareMore className="text-2xl text-gray-600 hover:text-[#e99157] cursor-pointer" />
+            </Tooltip>
+            <span className="absolute -top-2 -right-2 bg-[#e99157] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">2</span>
           </div>
-     {/* Overlay */}
+       </Link>
+
+
+          {/* Cart */}
+         <Link to={'/cart'}>
+         <div className="relative">
+            <Tooltip  title="Cart" placement="top">
+              <MdOutlineShoppingCart className="text-2xl text-gray-600 hover:text-[#e99157] cursor-pointer" />
+            </Tooltip>
+            <span className="absolute -top-2 -right-2 bg-[#e99157] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">{cart.length}</span>
+          </div>
+         </Link>
+
+          {/* User Dropdown */}
+          <div className="relative group">
+            <FaRegUser className="text-2xl text-gray-600 hover:text-[#e99157] cursor-pointer" />
+            <div className="absolute right-0  hidden group-hover:block bg-white border rounded-lg shadow-md p-3 z-50 space-y-2 w-40">
+              <Link to="/user" className="block text-sm text-gray-700 hover:text-blue-600">User</Link>
+              {
+                user?<button onClick={logOut} className="block text-sm text-gray-700 hover:text-blue-600 cursor-pointer">Log Out</button>:<div><Link to="/login" className="block text-sm text-gray-700 hover:text-blue-600">Login</Link>
+              <Link to="/signIn" className="block text-sm text-gray-700 hover:text-blue-600">Register</Link> </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ✅ Search Bar */}
+      <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="flex w-full sm:w-auto gap-2">
+          <input
+            type="text"
+            placeholder="Search products here..."
+            className="w-full sm:w-72 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#e99157]"
+          />
+          <button className="bg-[#e99157] text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all">
+            Search
+          </button>
+        </div>
+      </div>
+
+      {/* ✅ Sidebar Overlay */}
       {open && (
         <div
-          className="fixed inset-0  bg-opacity-40 z-40"
+          className="fixed inset-0 bg-black bg-opacity-40 z-40"
           onClick={() => setOpen(false)}
-        ></div>
+        />
       )}
 
-      {/* Sidebar */}
+      {/* ✅ Sidebar Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-4 z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 left-0 h-full w-64 bg-white shadow-lg p-5 z-50 transform transition-transform duration-300 ${
           open ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <h1 className="text-xl font-semibold mb-4">Shop By Category</h1>
-        <div className="space-y-3">
-          <div>          <Link to="#">Home</Link>
-          </div>
-          <Link to="#">Jewellery</Link>
-          <div>          <Link to="#">Fashion</Link>
-          </div>
-          <div>          <Link to="#">New Arrivals</Link>
-</div>
-          <div>          <Link to="#">Cosmetics</Link>
-          </div>
-          <div>          <Link to="#">All Brands</Link>
-          </div>
-          <div>          <Link to="#">Blog</Link>
-          </div>
-          <div>          <Link to="#">Furniture</Link>
-          </div>
-          <div>          <Link to="#">More</Link>
-          </div>
-          
-         
-         
-        </div>
+        <h2 className="text-xl font-semibold text-blue-600 mb-4 border-b pb-2">Shop by Category</h2>
+        <nav className="flex flex-col space-y-3 text-gray-700">
+          <Link to="#" className="hover:text-blue-500">Home</Link>
+          <Link to="#" className="hover:text-blue-500">Jewellery</Link>
+          <Link to="#" className="hover:text-blue-500">Fashion</Link>
+          <Link to="#" className="hover:text-blue-500">New Arrivals</Link>
+          <Link to="#" className="hover:text-blue-500">Cosmetics</Link>
+          <Link to="#" className="hover:text-blue-500">All Brands</Link>
+          <Link to="#" className="hover:text-blue-500">Blog</Link>
+          <Link to="#" className="hover:text-blue-500">Furniture</Link>
+          <Link to="#" className="hover:text-blue-500">More</Link>
+        </nav>
       </div>
-          {/* Icons */}
-          <div className='flex gap-5'>
-            {/* Message */}
-            <div className="relative">
-              <Tooltip title="Message" placement="top">
-                <p><LuMessageSquareMore className="text-2xl" /></p>
-              </Tooltip>
-              <p className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                2
-              </p>
-            </div>
-
-            {/* Heart */}
-            <div className="relative">
-              <Tooltip title="Wishlist" placement="top">
-                <p><FaRegHeart className="text-2xl" /></p>
-              </Tooltip>
-              <p className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                2
-              </p>
-            </div>
-
-            {/* Cart */}
-            <div className="relative">
-              <Tooltip title="Cart" placement="top">
-                <p><MdOutlineShoppingCart className="text-2xl" /></p>
-              </Tooltip>
-              <p className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                2
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* 🔻 Search + Login Row: Stacked on mobile, inline on large */}
-        <div className='flex  sm:flex-row justify-between items-start sm:items-center mt-4 gap-3'>
-
-          {/* Search Box */}
-          <div className='flex  sm:flex-row items-start sm:items-center gap-2 w-full sm:w-auto'>
-            <input
-              placeholder='Search Products Here ...'
-              className='border rounded-md p-2 w-full sm:w-72'
-              type="text"
-            />
-            <button className='bg-orange-400 rounded-md px-4 py-2 w-full sm:w-auto'>Search</button>
-          </div>
-
-          {/* Login/Register */}
-          <div className='flex gap-3'>
-           
-            <div className="dropdown dropdown-left">
-  <div tabIndex={0} role="button" className=" m-1"> <Link ><FaRegUser className='text-2xl ' /></Link> </div>
-  <ul tabIndex={0} className="dropdown-content menu space-y-4 bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-   <Link>Login</Link>
-   <Link>Register</Link>
-    
-  </ul>
-</div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
+    </div>
+  );
 }

@@ -23,40 +23,54 @@ export default function BannerCategory() {
     { img: shoe, title: 'Shoe' },
     { img: bag, title: 'Bag' },
     { img: xbox, title: 'Xbox' },
-    { img: xbox, title: 'Xbox' },
-    { img: xbox, title: 'Xbox' },
   ];
 
   return (
-    <div className="mt-7 ">
-      <Swiper
-        modules={[Navigation]}
-        navigation
-        spaceBetween={60}
-        breakpoints={{
-          320: { slidesPerView: 2 },
-          480: { slidesPerView: 3 },
-          768: { slidesPerView: 4 },
-          1024: { slidesPerView: 5 },
-          1280: { slidesPerView: 6 },
-        }}
-        className="mySwiper"
-      >
-        {items.map((item, idx) => (
-          <SwiperSlide key={idx}>
-            <div className="bg-white lg:w-[200px] w-[150px] p-3 rounded-md shadow hover:shadow-md transition duration-300">
+    <div className="mt-10 px-4 py-5  relative">
+    <Swiper
+      modules={[Navigation]}
+      navigation={{
+        nextEl: '.custom-next',
+        prevEl: '.custom-prev',
+      }}
+      spaceBetween={10}
+      breakpoints={{
+        320: { slidesPerView: 3 },
+        480: { slidesPerView: 4 },
+        640: { slidesPerView: 5 },
+        768: { slidesPerView: 6 },
+        1024: { slidesPerView: 7 },
+      }}
+      className="!pb-12"
+    >
+      {items.map((item, idx) => (
+        <SwiperSlide key={idx} className="flex justify-center">
+          <div className="bg-white w-[90px] md:w-[100px] p-2 rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col items-center">
+            <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
               <img
-                className="w-full h-[100px] object-contain"
                 src={item.img}
                 alt={item.title}
+                className="w-3/4 h-3/4 object-contain"
               />
-              <h2 className="text-center text-base font-medium mt-2">
-                {item.title}
-              </h2>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+            <h2 className="text-center text-sm font-medium mt-2 text-gray-700">
+              {item.title}
+            </h2>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  
+    {/* Centered at bottom navigation buttons */}
+    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      <button className="custom-prev bg-orange-400 border rounded-full p-2 shadow hover:bg-red-300 transition">
+        ❮
+      </button>
+      <button className="custom-next bg-orange-400 border rounded-full p-2 shadow hover:bg-red-300 transition">
+        ❯
+      </button>
     </div>
+  </div>
+  
   );
 }

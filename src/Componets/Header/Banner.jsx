@@ -19,9 +19,9 @@ export default function Banner() {
       <p className="text-sm md:text-lg">Big Saving Days Sale</p>
       <h2 className="text-base md:text-2xl font-semibold leading-snug">Women Solid Round Green T-Shirt</h2>
       <p className="mt-1 text-sm md:text-base">
-        Starting At Only <span className="text-orange-500 font-bold">$58.00</span>
+        Starting At Only <span className="text-[#e99157] font-bold">$58.00</span>
       </p>
-      <button className="mt-2 md:mt-4 bg-orange-500 hover:bg-orange-600 text-white px-3 py-1 md:px-5 md:py-2 rounded">
+      <button className="mt-2 md:mt-4 bg-[#e99157] hover:bg-orange-600 text-white px-3 py-1 md:px-5 md:py-2 rounded">
         Shop Now
       </button>
     </div>
@@ -61,6 +61,26 @@ export default function Banner() {
                 {slideText}
               </div>
             </SwiperSlide>
+            <SwiperSlide>
+              <div className="relative">
+                <img
+                  src={slide2}
+                  alt="Slide 2"
+                  className="w-full h-auto rounded-md transition-all duration-300 ease-in-out hover:scale-[1.02]"
+                />
+                {slideText}
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="relative">
+                <img
+                  src={slide2}
+                  alt="Slide 2"
+                  className="w-full h-auto rounded-md transition-all duration-300 ease-in-out hover:scale-[1.02]"
+                />
+                {slideText}
+              </div>
+            </SwiperSlide>
           </Swiper>
         </div>
 
@@ -77,7 +97,7 @@ export default function Banner() {
   <div className="absolute inset-0 flex flex-col justify-center items-start p-4 ">
     <p className="text-sm md:text-base">Limited Offer</p>
     <h3 className="text-lg md:text-xl font-semibold">Stylish Denim Jacket</h3>
-    <button className="mt-2 bg-orange-500 hover:bg-orange-600 px-4 py-1 rounded text-sm md:text-base">
+    <button className="mt-2 bg-[#e99157] hover:bg-orange-600 px-4 py-1 rounded text-sm md:text-base">
       Shop Now
     </button>
   </div>
@@ -93,7 +113,7 @@ export default function Banner() {
     <div className="  p-2 md:p-4 rounded-md max-w-[70%] md:max-w-[50%]">
       <p className="text-sm md:text-base">Limited Offer</p>
       <h3 className="text-lg md:text-xl font-semibold">Stylish Denim Jacket</h3>
-      <button className="mt-2 bg-orange-500 hover:bg-orange-600 px-4 py-1 rounded text-sm md:text-base">
+      <button className="mt-2 bg-[#e99157] hover:bg-orange-600 px-4 py-1 rounded text-sm md:text-base">
         Shop Now
       </button>
     </div>

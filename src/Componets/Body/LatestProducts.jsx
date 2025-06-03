@@ -1,32 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import useAxios from '../../Hooks/useAxios';
+import { useNavigate } from 'react-router-dom';
+import useProducts from '../../Hooks/useProducts';
 
 export default function LatestProducts() {
-  const [category, setCategory] = useState("Fashion");
+  const allProduct =useProducts()
+  const [products, setProducts]= useState([])
 
-  const allProducts = {
-    Fashion: new Array(15).fill().map((_, i) => ({
-      id: i,
-      name: "T-Shirt",
-      brand: "Zara",
-      price: 19.99,
-    })),
-    Electronics: new Array(15).fill().map((_, i) => ({
-      id: i + 100,
-      name: "Headphones",
-      brand: "Sony",
-      price: 79.99,
-    })),
-    Furniture: new Array(15).fill().map((_, i) => ({
-      id: i + 200,
-      name: "Chair",
-      brand: "Ikea",
-      price: 39.99,
-    })),
-  };
-
-  const products = allProducts[category];
-
+  useEffect(()=>{
+      const latestProducts = allProduct.filter((p)=>p.position=='Latest')
+  setProducts(latestProducts)
+  },[allProduct])
   const scroll = (dir, id) => {
     const slider = document.getElementById(id);
     if (slider) {
@@ -37,6 +22,13 @@ export default function LatestProducts() {
       });
     }
   };
+
+      const navigate =useNavigate()
+      const handleProduct=(id)=>{
+        navigate(`products/${id}`)
+       
+    
+      }
 
   return (
     <div className='container mx-auto mt-7 lg:mt-16 md:mt-10'>
@@ -66,6 +58,7 @@ export default function LatestProducts() {
         >
           {products.map((product) => (
             <div
+            onClick={()=>handleProduct(product._id)}
               key={product.id}
               className="snap-start flex-shrink-0 w-52 sm:w-56 md:w-60 lg:w-64"
             >
