@@ -12,6 +12,7 @@ import shoe from './../../assets/BannerSlider/BannerCategory/shoe.png';
 import bag from './../../assets/BannerSlider/BannerCategory/bag.png';
 import xbox from './../../assets/BannerSlider/BannerCategory/xbox.png';
 import mobile from './../../assets/BannerSlider/BannerCategory/mobile.png';
+import { NavLink } from 'react-router-dom';
 
 export default function BannerCategory() {
   const items = [
@@ -45,7 +46,7 @@ export default function BannerCategory() {
     >
       {items.map((item, idx) => (
         <SwiperSlide key={idx} className="flex justify-center">
-          <div className="bg-white w-[90px] md:w-[100px] p-2 rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col items-center">
+          <NavLink to={`/products/category/${item.title}`} className="bg-white w-[90px] md:w-[100px] p-2 rounded-lg shadow-sm hover:shadow-md transition duration-200 flex flex-col items-center">
             <div className="w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden bg-gray-100 flex items-center justify-center">
               <img
                 src={item.img}
@@ -56,7 +57,7 @@ export default function BannerCategory() {
             <h2 className="text-center text-sm font-medium mt-2 text-gray-700">
               {item.title}
             </h2>
-          </div>
+          </NavLink>
         </SwiperSlide>
       ))}
     </Swiper>

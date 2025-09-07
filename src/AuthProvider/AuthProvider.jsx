@@ -6,6 +6,7 @@ import useAxios from '../Hooks/useAxios'
 export const AuthContext = createContext()
 export default function AuthProvider({children}) {
 const [user, setUser] =useState([])
+
 const [loading, setLoading] =useState([true])
   // create user using signIn method
     const handleRegister=(email, password)=>{
@@ -24,6 +25,7 @@ const provider =new GoogleAuthProvider()
         signInWithPopup(auth, provider)
         .then((res)=>{
           const user =res.user;
+          
           const userInfo ={
             name:user.displayName,
             email:user.email
@@ -32,6 +34,7 @@ const provider =new GoogleAuthProvider()
           axiosSecure.post('/users',userInfo)
 .then((res)=>{
   console.log(res.data)
+  
 })
 .catch((error)=>{
   if (error.response && error.response.status === 409) {

@@ -17,7 +17,7 @@ export default function Navbar() {
   useEffect(()=>{
  axiosSecure.get(`/carts/${email}`)
  .then((res)=>{
-  console.log(res.data)
+  // console.log(res.data)
   setCart(res.data)
  })
   },[user])

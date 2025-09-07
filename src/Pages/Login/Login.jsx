@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const {handleLogin, googleLogin}= useContext(AuthContext)
+ const navigate=useNavigate()
   const handleData=(e)=>{
     e.preventDefault()
     const formData = e.target;
@@ -23,6 +24,7 @@ const Login = () => {
           draggable: true
         });
       }
+      navigate('/')
     })
     .catch((error)=>{
       console.log(error.message)

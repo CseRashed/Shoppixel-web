@@ -25,7 +25,6 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <svg width="40" height="40" fill="currentColor" className="text-orange-400" viewBox="0 0 24 24">
-                <path d="M22.672 15.226l-2.432.811..."></path>
               </svg>
               <span className="text-xl font-bold text-white">Shoppixel</span>
             </div>
@@ -36,17 +35,14 @@ export default function Footer() {
             <div className="flex gap-4 mt-4">
               <a href="#" className="hover:text-white transition">
                 <svg width="20" height="20" fill="currentColor" className="text-gray-400 hover:text-white" viewBox="0 0 24 24">
-                  <path d="M22.46 6c-.77.35-1.6.58-2.46.69a4.15..."></path>
                 </svg>
               </a>
               <a href="#" className="hover:text-white transition">
                 <svg width="20" height="20" fill="currentColor" className="text-gray-400 hover:text-white" viewBox="0 0 24 24">
-                  <path d="M21.75 0H2.25C1.01 0 0 1.01..."></path>
                 </svg>
               </a>
               <a href="#" className="hover:text-white transition">
                 <svg width="20" height="20" fill="currentColor" className="text-gray-400 hover:text-white" viewBox="0 0 24 24">
-                  <path d="M22 5.72c-.77.34-1.6.57-2.46.68..."></path>
                 </svg>
               </a>
             </div>

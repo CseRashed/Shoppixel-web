@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
-import useAxios from '../../Hooks/useAxios';
-import { useNavigate } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 import useProducts from '../../Hooks/useProducts';
 
 export default function FeaturedProducts() {
@@ -26,12 +25,6 @@ export default function FeaturedProducts() {
         }
       };
 
-      const navigate =useNavigate()
-      const handleProduct=(id)=>{
-        navigate(`products/${id}`)
-       
-    
-      }
   return (
     <div className='container mx-auto mt-7 lg:mt-16 md:mt-10'>
             <h3 className='text-2xl font-medium'>Featured Products</h3>
@@ -60,10 +53,11 @@ export default function FeaturedProducts() {
             >
               {products.map((product) => (
                 <div
-                  key={product.id}
+
+                  key={product._id}
                   className="snap-start flex-shrink-0 w-52 sm:w-56 md:w-60 lg:w-64"
                 >
-                  <div onClick={()=>handleProduct(product._id)} className="card bg-base-200 shadow-md">
+                  <NavLink  to={`/products/${product._id}`}  className="card bg-base-200 shadow-md">
                     <figure className="bg-white h-28 flex items-center justify-center">
                       <img src={product.photo} alt={`${product.name} image`} />
                     </figure>
@@ -73,7 +67,7 @@ export default function FeaturedProducts() {
                       <p className="text-yellow-500 text-sm">★★★★☆</p>
                       <p className="text-green-600 font-bold">${product.price}</p>
                     </div>
-                  </div>
+                  </NavLink>
                 </div>
               ))}
             </div>

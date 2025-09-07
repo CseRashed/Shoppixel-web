@@ -8,6 +8,7 @@ import Checkout from "./Pages/Checkout/Checkout";
 import Cart from "./Pages/Cart/Cart";
 import Message from "./Pages/Message/Message";
 import User from "./Pages/User/User";
+import CategoryProducts from "./CategoryProduct/CategoryProducts";
 
 
 const router =createHashRouter([
@@ -24,6 +25,10 @@ const router =createHashRouter([
             },{
                 path:'/signIn',
                 element:<Signup></Signup>
+            },
+            {
+                path:'/products/category/:category',
+                element:<CategoryProducts></CategoryProducts>
             }
         ]
     },

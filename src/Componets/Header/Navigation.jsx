@@ -1,10 +1,31 @@
-import React, { useState } from 'react';
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaAngleDown } from "react-icons/fa6";
-import { Link, NavLink } from 'react-router-dom';
+import {  NavLink, useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate =useNavigate()
+ const navItems = [
+  'Fashion',
+  'Jewellery',
+  'Watches',
+  'OutWear',
+  'Cosmetics',
+  'Accessories',
+  'Electronic',
+  'Furniture',
+  'Sunglasses',
+  'Rolling Diamond',
+  'Xbox Controller',
+  'Leather Watch',
+  'Smart Tablet',
+  'Purse',
+];
+
+// const handleProduct=(item)=>{
+// navigate(`/products/category/${item}`)
+// }
 
   return (
     <>
@@ -41,36 +62,36 @@ export default function Navigation() {
           <div className="relative group">
             <span className="cursor-pointer hover:text-blue-600 transition">New Arrivals</span>
             <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Item {i}</li>
-              ))}
+              
+                <li  className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Item </li>
+            
             </ul>
           </div>
 
           <div className="relative group">
             <span className="cursor-pointer hover:text-blue-600 transition">All Brands</span>
             <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Brand {i}</li>
-              ))}
+             
+                <li className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Brand</li>
+             
             </ul>
           </div>
 
           <div className="relative group">
             <span className="cursor-pointer hover:text-blue-600 transition">Blog</span>
             <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Blog {i}</li>
-              ))}
+             
+                <li  className="px-4 py-2 hover:bg-blue-100 cursor-pointer">Blog</li>
+             
             </ul>
           </div>
 
           <div className="relative group">
             <span className="cursor-pointer hover:text-blue-600 transition">More</span>
             <ul className="absolute hidden group-hover:block top-7 left-0 bg-white shadow-lg rounded-lg w-48 py-2 z-40">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <li key={i} className="px-4 py-2 hover:bg-blue-100 cursor-pointer">More {i}</li>
-              ))}
+              
+               <NavLink to={'/categoryProducts'}> <li  className="px-4 py-2 hover:bg-blue-100 cursor-pointer">More </li></NavLink>
+          
             </ul>
           </div>
         </div>
@@ -95,20 +116,18 @@ export default function Navigation() {
       >
         <h2 className="text-xl font-semibold text-blue-600 mb-4 border-b pb-2">Shop by Category</h2>
         <nav className="flex flex-col space-y-3 text-gray-700">
-          <Link to="#" className="hover:text-blue-500">Fashion</Link>
-          <Link to="#" className="hover:text-blue-500">Jewellery</Link>
-          <Link to="#" className="hover:text-blue-500">Watches</Link>
-          <Link to="#" className="hover:text-blue-500">OutWear</Link>
-          <Link to="#" className="hover:text-blue-500">Cosmetics</Link>
-          <Link to="#" className="hover:text-blue-500">Accessories</Link>
-          <Link to="#" className="hover:text-blue-500">Electronics</Link>
-          <Link to="#" className="hover:text-blue-500">Furniture</Link>
-          <Link to="#" className="hover:text-blue-500">Sunglasses</Link>
-          <Link to="#" className="hover:text-blue-500">Rolling Diamond</Link>
-          <Link to="#" className="hover:text-blue-500">Xbox Controller</Link>
-          <Link to="#" className="hover:text-blue-500">Leather Watch</Link>
-          <Link to="#" className="hover:text-blue-500">Smart Tablet</Link>
-          <Link to="#" className="hover:text-blue-500">Purse</Link>
+
+          {navItems.map((item, index) => (
+        <NavLink
+        to={`/products/category/${item}`}
+          key={index}
+          className="hover:text-blue-500"
+          // onClick={() => handleProduct(item)}
+        >
+          {item}
+        </NavLink>
+      ))}
+        
         </nav>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import useAxios from '../../Hooks/useAxios';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import useProducts from '../../Hooks/useProducts';
 
 export default function LatestProducts() {
@@ -23,12 +23,12 @@ export default function LatestProducts() {
     }
   };
 
-      const navigate =useNavigate()
-      const handleProduct=(id)=>{
-        navigate(`products/${id}`)
+      // const navigate =useNavigate()
+      // const handleProduct=(id)=>{
+      //   navigate(`products/${id}`)
        
     
-      }
+      // }
 
   return (
     <div className='container mx-auto mt-7 lg:mt-16 md:mt-10'>
@@ -57,9 +57,10 @@ export default function LatestProducts() {
           className="flex space-x-4 overflow-x-auto scrollbar-hide px-6 snap-x scroll-smooth"
         >
           {products.map((product) => (
-            <div
-            onClick={()=>handleProduct(product._id)}
-              key={product.id}
+            <NavLink
+             to={`products/${product._id}`}
+            // onClick={()=>handleProduct(product._id)}
+              key={product._id}
               className="snap-start flex-shrink-0 w-52 sm:w-56 md:w-60 lg:w-64"
             >
               <div className="card bg-base-200 shadow-md">
@@ -73,7 +74,7 @@ export default function LatestProducts() {
                   <p className="text-green-600 font-bold">${product.price}</p>
                 </div>
               </div>
-            </div>
+            </NavLink>
           ))}
         </div>
       </div>

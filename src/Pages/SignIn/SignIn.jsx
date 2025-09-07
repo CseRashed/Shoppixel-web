@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthProvider, { AuthContext } from "../../AuthProvider/AuthProvider";
 import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const Signup = () => {
 const { handleRegister,googleLogin } = useContext(AuthContext)
 const axiosSecure = useAxios()
+const navigate=useNavigate()
   const handleData=(e)=>{
     e.preventDefault();
     const formData =e.target;
@@ -30,6 +31,7 @@ const axiosSecure = useAxios()
   icon: "success",
   draggable: true
 });
+navigate('/')
           }
         })
       }

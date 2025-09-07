@@ -3,9 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FiSend, FiPhone, FiVideo } from "react-icons/fi";
 import { BiImageAdd } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
-import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000"); // Update in production
 
 export default function Message() {
   const userId = "user123";   // Replace with real user ID
@@ -17,32 +15,8 @@ export default function Message() {
   const [image, setImage] = useState(null);
   const messagesEndRef = useRef(null);
 
-  useEffect(() => {
-    socket.emit("register", userId);
 
-    socket.on("receive_message", (data) => {
-      const incoming = {
-        from: data.senderId === adminId ? "admin" : "user",
-        ...data.message,
-        time: new Date(data.timestamp).toLocaleTimeString(),
-      };
-      setMessages((prev) => [...prev, incoming]);
-    });
 
-    socket.on("typing", () => {
-      setIsTyping(true);
-      setTimeout(() => setIsTyping(false), 1500);
-    });
-
-    return () => {
-      socket.off("receive_message");
-      socket.off("typing");
-    };
-  }, []);
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
